@@ -1,0 +1,35 @@
+<!-- view-submissions.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+  <h1>Form Submissions</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Query</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% submissions.forEach(function(submission) { %>
+        <tr>
+          <td><%= submission.name %></td>
+          <td><%= submission.email %></td>
+          <td><%= submission.phone %></td>
+          <td><%= submission.query %></td>
+          <td><%= submission.timestamp %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>

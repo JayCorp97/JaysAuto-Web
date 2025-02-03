@@ -1,0 +1,164 @@
+<%- include('header'); -%>
+
+<main>
+
+    <!-- Hero Section -->
+    <section class="section-header text-center">
+        <div class="container">
+            <h1>Reliable Vehicle Repair Services</h1>
+            <p>Your trusted partner for quality vehicle maintenance and repair.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Services</h2>
+            <div class="row g-4">
+                <!-- Service 1 -->
+                <div class="col-md-4">
+                    <div class="card services-card h-100">
+                        <img src="images/system/Engine-Repair.jpg" class="card-img-top" alt="Engine Repair">
+                        <div class="card-body">
+                            <h5 class="card-title">Engine Repair</h5>
+                            <p class="card-text">Comprehensive engine diagnostics and repair to keep your vehicle running smoothly.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="col-md-4">
+                    <div class="card services-card h-100">
+                        <img src="images/system/Oil-Change.png" class="card-img-top" alt="Oil Change">
+                        <div class="card-body">
+                            <h5 class="card-title">Oil Change</h5>
+                            <p class="card-text">Regular oil changes to improve your vehicle's performance and longevity.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="col-md-4">
+                    <div class="card services-card h-100">
+                        <img src="images/system/tyre-repair.png" class="card-img-top" alt="Tire Replacement">
+                        <div class="card-body">
+                            <h5 class="card-title">Tire Replacement</h5>
+                            <p class="card-text">Top-quality tire replacement and balancing services for a safer ride.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 4 -->
+                <div class="col-md-4">
+                    <div class="card services-card h-100">
+                        <img src="images/system/paint.jpg" class="card-img-top" alt="Paint Works">
+                        <div class="card-body">
+                            <h5 class="card-title">Paint Works</h5>
+                            <p class="card-text">Transform your vehicle with our expert paint services. Whether it's a full-body repaint or touch-ups to restore your car's original shine, our skilled technicians use high-quality paints and advanced techniques to ensure a flawless finish. We also offer custom paint jobs to give your car a unique, personalized look. Keep your vehicle looking fresh and protected with our premium paint works service.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 5 -->
+                <div class="col-md-4">
+                    <div class="card services-card h-100">
+                        <img src="images/system/wash.png" class="card-img-top" alt="Body Wash">
+                        <div class="card-body">
+                            <h5 class="card-title">Car Body Wash</h5>
+                            <p class="card-text">Restore your car’s shine with our premium car body wash, designed to clean and protect your vehicle’s exterior. We use eco-friendly products that gently remove dirt and grime, leaving your car looking spotless and fresh. Ideal for maintaining the paint and finish of your vehicle.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service 6 -->
+                <div class="col-md-4">
+                    <div class="card services-card h-100">
+                        <img src="images/system/interior.png" class="card-img-top" alt="Interior Care">
+                        <div class="card-body">
+                            <h5 class="card-title">Interior Care</h5>
+                            <p class="card-text">Keep the inside of your vehicle as pristine as the outside with our expert Interior Care services. We offer deep cleaning of seats, carpets, dashboards, and upholstery, removing dirt, stains, and odors. Using premium cleaning agents and tools, we’ll restore your vehicle’s interior to a fresh, like-new condition. Whether you need a quick refresh or a thorough deep clean, our Interior Care ensures a comfortable, clean environment for your ride.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Be Cool, Do it Smart!</h2>
+            <div class="row">
+                <div class="col-md-6 contact-section">
+                    <img src="images/system/get intouch.png" alt="Contact Us">
+                    <h4>Get in Touch</h4>
+                    <p>Have questions or need to book a repair? We're here to help!</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Phone:</strong> (123) 456-7890</li>
+                        <li><strong>Email:</strong> support@vehiclerepair.com</li>
+                        <li><strong>Address:</strong> 123 Repair Lane, Auto City, VIC</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-center mb-4">Make an Appointment</h2>
+                    <div id="errorMessages" class="mt-3" style="display: none;">
+                        <ul class="list-group" id="errorList"></ul>
+                    </div>
+                    <form class="contact-form" id="appoinmentForm" action="/submit-appoinment" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email"class="form-control" id="email" name="email"  placeholder="Your Email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Your Phone Number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="service" class="form-label">Service Type</label>
+                            <div class="col-sm-10 pt-2">
+                                <select class="form-select" id="service" name="service" required>
+                                    <option value="" disabled selected>Select the Service</option>
+                                    <option value="Engine Repair">Engine Repair</option>
+                                    <option value="Oil Change">Oil Change</option>
+                                    <option value="Tire Replacement">Tire Replacement</option>
+                                    <option value="Paint Works">Paint Works</option>
+                                    <option value="Car Body Wash">Car Body Wash</option>
+                                    <option value="Interior Care">Interior Care</option>
+                                </select>
+                            </div>
+                        </div>                        
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="time" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="time" name="time" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" rows="4" id="message" name="message" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <div id="ServerSideErrors">
+                      <% if (errors && errors.length > 0) { %>
+                        <ul>
+                          <% errors.forEach(function(error) { %>
+                            <li style="color: red;"><%= error %></li>
+                          <% }); %>
+                        </ul>
+                      <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+
+<script src="js/serv_scripts.js"></script>
+
+<%- include('footer'); -%>

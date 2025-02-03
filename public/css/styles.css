@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+section {
+    padding: 50px 0;
+}
+
+.card {
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background: #222;
+    color: #fff;
+}
+
+form .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+.card-title {
+    min-height: 50px; /* Set a minimum height for card titles */
+    text-align: center; /* Center the title text if needed */
+}
+.card-img-top {
+    height: 200px; /* Set a fixed height for images */
+    object-fit: cover; /* Ensure proportional cropping */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card {
+    border-radius: 10px; /* Optional rounded corners */
+}
+.section-header {
+    background-color: #f8f9fa;
+    padding: 30px 0;
+}
+.services-card img {
+    height: 150px;
+    object-fit: cover;
+}
+.contact-form {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+/* Style for error messages */
+#errorMessages {
+    color: red;
+}
+
+#errorList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#errorList li {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.star-rating {
+    display: inline-block;
+    direction: rtl;
+    font-size: 1.5rem;
+    color: #ccc;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+}
+
+.star-rating input:checked ~ label {
+    color: #ffcc00;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffcc00;
+}
+/* Ensure images fit properly and are of a consistent size */
+.services-card img {
+    width: 100%; /* Make images fill the container */
+    height: auto; /* Keep aspect ratio */
+    max-height: 200px; /* Set max height for consistent sizing */
+}
+.contact-section img {
+    width: 100%;
+    height: auto;
+    max-width: 400px; /* Make sure the image doesn't stretch too large */
+}
+
+/* Custom style to limit image size */
+.contact-img {
+    width: 100%; /* Adjust width to 100% of parent */
+    max-width: 200px; /* Optional: restrict max size of image */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers the container area */
+}

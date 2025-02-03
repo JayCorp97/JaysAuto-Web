@@ -1,0 +1,271 @@
+<%- include('header'); -%>
+
+<style>
+    .badge-success {
+    background-color: #28a745; /* Customize the badge color */
+    text-transform: uppercase;
+    }
+    .collapse {
+    display: none;
+    }
+
+    .collapse.show {
+        display: block;
+    }
+</style>
+
+<main>
+    <!-- Vehicles Page Title -->
+    <section class="bg-light p-5 text-center">
+        <div class="container">
+            <h1>Available Vehicles</h1>
+            <p>Explore our selection of cars and trucks. Find the perfect one for you!</p>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="p-5">
+        <div class="container">
+            <input type="text" id="searchBar" class="form-control" placeholder="Search for vehicles..." onkeyup="searchVehicles()">
+        </div>
+    </section>
+
+    <!-- Vehicles List
+    <section id="vehicle-list" class="p-5">
+        <div class="container">
+            <div class="row" id="vehicleCards">
+                <% vehicles.forEach(vehicle => { %>
+                    <div class="col-md-4 vehicle-card" data-name="<%= vehicle.name %>">
+                        <div class="card h-100">
+                            <img src="<%= vehicle.image %>" class="card-img-top img-flex" alt="<%= vehicle.name %>">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title"><strong><%= vehicle.brand %></strong> - <%= vehicle.name %></h5>
+                                <p class="card-text flex-grow-1"><%= vehicle.description %></p>
+                                <p class="card-body flex-grow-1 text-center"><strong>$<%= vehicle.price.toLocaleString() %></strong></p>
+                                <a href="/register" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                <% }); %>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="vehicleDetailModal" tabindex="-1" role="dialog" aria-labelledby="vehicleDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="vehicleDetailModalLabel">Vehicle Details</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <h5>
+                        <strong id="vehicleBrand"></strong> - <span id="vehicleName"></span>
+                        <span id="vehicleCodition" class="badge badge-pill badge-success"></span>
+                    </h5>
+                    <img id="vehicleImage" class="img-fluid mb-3" alt="Vehicle Image">
+                    <p id="vehicleDescription"></p>
+                    <p><strong>Price:</strong> $<span id="vehiclePrice"></span></p>
+                    <br>
+                    <p class="font-weight-bold">Overview#</p>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <i class="fa-solid fa-gears"></i>
+                                <p id="vehicleGear" style="display: inline-block; margin: 0 0 0 5px;"></p>
+                            </td>
+                            <td>
+                                <i class="fa-solid fa-bolt"></i>
+                                <p id="vehicleEngine" style="display: inline-block; margin: 0 0 0 5px;"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa-solid fa-car-side"></i>
+                                <p id="vehicleBody" style="display: inline-block; margin: 0 0 0 5px;"></p>
+                            </td>
+                            <td>
+                                <i class="fa-solid fa-gas-pump"></i>
+                                <p id="vehicleFuel" style="display: inline-block; margin: 0 0 0 5px;"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <p id="vehicleMillege" style="display: inline-block; margin: 0 0 0 5px;"></p>
+                            </td>
+                            <td>
+                                <i class="fa-solid fa-industry"></i>
+                                <p id="vehicleYOM" style="display: inline-block; margin: 0 0 0 5px;"></p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-warning" data-dismiss="modal">For More</button> -->
+                    <button class="btn btn-warning for-more-btn" data-toggle="collapse" data-target="#vehiclemore">For More</button>
+                    <!-- Hidden Details Section -->
+                    <div id="vehiclemore" class="collapse mt-3">
+                        <p id="vehicleOther" style="display: inline-block; margin: 0 0 0 5px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vehicle List Section -->
+    <section id="vehicle-list" class="p-5">
+        <div class="container">
+            <div class="row" id="vehicleCards">
+                <% vehicles.forEach(vehicle => { %>
+                    <div class="col-md-4 vehicle-card" data-name="<%= vehicle.name %>">
+                        <div class="card h-100">
+                            <img src="<%= vehicle.image %>" class="card-img-top img-flex" alt="<%= vehicle.name %>">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title"><strong><%= vehicle.brand %></strong> - <%= vehicle.name %></h5>
+                                <p class="card-text flex-grow-1"><%= vehicle.description %><span style="display: none;"><%= vehicle.id %></span></p>
+                                <p class="card-body flex-grow-1 text-center"><strong>$<%= vehicle.price.toLocaleString() %></strong></p>
+                                <!-- View Details Button -->
+                                <button class="btn btn-primary view-details-btn" 
+                                        data-id="<%= vehicle.id %>"
+                                        data-brand="<%= vehicle.brand %>"
+                                        data-name="<%= vehicle.name %>"
+                                        data-description="<%= vehicle.description %>"
+                                        data-price="<%= vehicle.price %>"
+                                        data-image="<%= vehicle.image %>">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pagination -->
+    <section class="container text-center mt-4">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <% if (currentPage > 1) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="/vehicles?page=<%= currentPage - 1 %>">Previous</a>
+                    </li>
+                <% } %>
+
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <li class="page-item <%= (i === currentPage) ? 'active' : '' %>">
+                        <a class="page-link" href="/vehicles?page=<%= i %>"><%= i %></a>
+                    </li>
+                <% } %>
+
+                <% if (currentPage < totalPages) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="/vehicles?page=<%= currentPage + 1 %>">Next</a>
+                    </li>
+                <% } %>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- JavaScript for Search Functionality -->
+    <script>
+        function searchVehicles() {
+            let searchQuery = document.getElementById('searchBar').value.toLowerCase();
+            let vehicleCards = document.querySelectorAll('.vehicle-card');
+
+            vehicleCards.forEach(function(card) {
+                let vehicleName = card.getAttribute('data-name').toLowerCase();
+                card.style.display = vehicleName.includes(searchQuery) ? 'block' : 'none';
+            });
+        }
+    </script>
+
+    <!-- JavaScript to populate modal and show it -->
+    <script>
+        $(document).ready(function() {
+            $('.view-details-btn').on('click', function() {
+                var vid = $(this).data('id');
+
+                var brand = $(this).data('brand');
+                var name = $(this).data('name');
+                var description = $(this).data('description');
+                var price = $(this).data('price');
+                var image = $(this).data('image');
+                
+                $('#vehicleBrand').text(brand);
+                $('#vehicleName').text(name);
+                $('#vehicleDescription').text(description);
+                $('#vehiclePrice').text(price.toLocaleString());
+                $('#vehicleImage').attr('src', image);
+                
+                // $('#vehicleDetailModal').modal('show');
+
+
+                // Send AJAX request to fetch vehicle details
+                $.ajax({
+                    url: '/vehicle/details/' + vid,  // API endpoint for fetching vehicle details
+                    method: 'GET',
+                    success: function(response) {
+                        // Populate modal with the returned data
+                        $('#vehicleGear').text(response.gear);
+                        $('#vehicleEngine').text(response.engine);
+                        $('#vehicleBody').text(response.body);
+                        $('#vehicleFuel').text(response.fuel);
+                        $('#vehicleMillege').text(response.millege);
+                        $('#vehicleYOM').text(response.yom.toLocaleString());
+
+                        $('#vehicleCodition').text(response.codition);
+                        $('#vehicleOther').text(response.other);
+                        // $('#vehicleImage').attr('src', response.image); // Image URL
+                        
+                        // Show the modal
+                        $('#vehicleDetailModal').modal('show');
+                    },
+                    error: function(err) {
+                        console.error('Error fetching vehicle details:', err);
+                        alert('No vehicle details.');
+                    }
+                });
+
+
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.for-more-btn').on('click', function() {
+                var detailsDiv = $('#vehiclemore'); // Find the associated details div
+                
+                // Toggle visibility of the details section
+                detailsDiv.toggle();  // If hidden, it will show; if shown, it will hide
+
+                // Change button text based on visibility of the details
+                if (detailsDiv.is(':visible')) {
+                    $(this).text('Show Less');  // Change to 'Show Less' when details are visible
+                    $(this).removeClass('btn-warning').addClass('btn-info'); 
+                } else {
+                    $(this).text('For More');  // Change back to 'For More' when details are hidden
+                    $(this).removeClass('btn-info').addClass('btn-warning'); 
+                }
+            });
+        });
+    </script>
+
+</main>
+
+<%- include('footer'); -%>
