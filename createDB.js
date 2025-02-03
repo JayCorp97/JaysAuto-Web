@@ -194,7 +194,7 @@ db.serialize(() => {
             SELECT ta.id, u.id AS usr, ta.service, ta.date, ta.time, ta.message, kv.name AS status
             FROM users u
             INNER JOIN t_appoinment ta ON u.email = ta.email
-            INNER JOIN t_key_values kv ON ta.status = kv.value
+            INNER JOIN t_key_values kv ON ta.status = kv.value and "group" = 'status'
     `, (err) => {
         if (err) {
             console.error('Error creating view:', err.message);

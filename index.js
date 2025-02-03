@@ -165,7 +165,7 @@ app.get('/vehicle/details/:id', (req, res) => {
               engine: row.engine,
               body: row.body,
               millege: row.millege,
-              other: row.otherkawa,
+              other: row.other,
               gear: row.gear,
               fuel: row.fuel,
               codition: row.codition // Adjust to match the actual column in your database
@@ -192,12 +192,12 @@ app.get('/about', (req, res) => {
   const query = `SELECT * FROM t_comment ORDER BY id DESC LIMIT 5`;
 
   db.all(query, [], (err, rows) => {
-      if (err) {
-          console.error('Error retrieving comments:', err.message);
-          res.status(500).send('Error retrieving comments.');
-      } else {
-          res.render('about', { title: 'About Us', comments: rows, user: req.session.user || null });
-      }
+    if (err) {
+      console.error('Error retrieving comments:', err.message);
+      res.status(500).send('Error retrieving comments.');
+    } else {
+      res.render('about', { title: 'About Us', comments: rows, user: req.session.user || null });
+    }
   });
 });
 
@@ -210,7 +210,7 @@ app.post('/about-form', (req, res) => {
 
   // Validate form data (server-side)
   if (!commentName) errors.push("Name is required.");
-  if (!commentMessage&&!rating) errors.push("Comment or Rating is required.");
+  if (!commentMessage && !rating) errors.push("Comment or Rating is required.");
 
   // If there are errors, send them back to the form page
   if (errors.length > 0) {
@@ -226,11 +226,20 @@ app.post('/about-form', (req, res) => {
       return res.render('about', { errors: ["Database error. Please try again later."], title: 'About Us' });
     }
 
-    // Data inserted successfully
+    // Data inserted successfully, fetch the latest comments again
     console.log("New Feedback Received.");
 
-    // Render the about page with the personalized message for moto
-    res.render('about', { title: 'About Us', user: req.session.user || null });
+    // Fetch the latest comments to render after insertion
+    const query = `SELECT * FROM t_comment ORDER BY id DESC LIMIT 5`;
+    db.all(query, [], (err, rows) => {
+      if (err) {
+        console.error('Error retrieving comments:', err.message);
+        res.status(500).send('Error retrieving comments.');
+      } else {
+        // Render the about page with updated comments
+        res.render('about', { title: 'About Us', comments: rows, user: req.session.user || null });
+      }
+    });
   });
 
   stmt.finalize();
